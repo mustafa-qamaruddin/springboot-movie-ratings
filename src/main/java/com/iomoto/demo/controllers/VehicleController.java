@@ -1,44 +1,62 @@
 package com.iomoto.demo.controllers;
 
+import com.iomoto.demo.models.VehicleModel;
+import com.iomoto.demo.services.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/vehicles")
-public class vehicleController {
+public class VehicleController {
 
     @Autowired
-    private vehicleService VehicleService;
+    private VehicleService vehicleService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<vehicleDto> addvehicle(@RequestBody @Valid vehicleNewDto vehicleNewDto) {
-        vehicleDto vehicle = vehicleService.addvehicle(vehicleNewDto);
+    public ResponseEntity<VehicleModel> addvehicle(@RequestBody @Valid VehicleModel _vehicle) {
+        VehicleModel vehicle = vehicleService.addVehicle(_vehicle);
         return ResponseEntity.ok(vehicle);
     }
 
-    @PostMapping(path = "/update")
-    public ResponseEntity<vehicleDto> updatevehicle(
-            @RequestBody @Valid vehicleExistingDto vehicleExistingDto) {
-        vehicleDto vehicle = vehicleService.updatevehicle(vehicleExistingDto);
+    @PutMapping(path = "/update")
+    public ResponseEntity<VehicleModel> updatevehicle(
+            @RequestBody @Valid VehicleModel _vehicle) {
+        VehicleModel vehicle = vehicleService.updateVehicle(_vehicle);
         return ResponseEntity.ok(vehicle);
     }
 
     @DeleteMapping(path = "/{vehicleId}/delete")
     public void deletevehicle(@PathVariable(name = "vehicleId") String vehicleId) {
-        vehicleService.deletevehicle(vehicleId);
+        vehicleService.deleteVehicle(vehicleId);
     }
 
     @GetMapping(path = "/{vehicleId}")
-    public ResponseEntity<vehicleDto> getvehicle(
+    public ResponseEntity<VehicleModel> getvehicle(
             @PathVariable(name = "vehicleId") String vehicleId) {
-        vehicleDto vehicle = vehicleService.getvehicleById(vehicleId);
+        VehicleModel vehicle = vehicleService.getVehicleById(vehicleId);
         return ResponseEntity.ok(vehicle);
     }
 
     @GetMapping(path = "/all")
-    public ResponseEntity<Page<vehicleDto>> getvehicles(@PageableDefault(page = 0,
+    public ResponseEntity<Page<VehicleModel>> getvehicles(@PageableDefault(page = 0,
             size = 30) @SortDefault.SortDefaults({@SortDefault(sort = "modified",
             direction = Sort.Direction.DESC)}) Pageable pageable) {
-        Page<vehicleDto> vehicles = vehicleService.getAllvehicles(pageable);
+        Page<VehicleModel> vehicles = vehicleService.getAllVehicles(pageable);
         return ResponseEntity.ok(vehicles);
     }
 }

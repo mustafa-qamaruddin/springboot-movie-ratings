@@ -1,5 +1,6 @@
 package com.iomoto.demo.controllers;
 
+import com.iomoto.demo.exceptions.CustomError;
 import com.iomoto.demo.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class GlobalExceptionHandlerController {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Object> resourceNotFound(ResourceNotFoundException ex,
                                                    HttpServletRequest request) {
-        Error error = new Error();
+        CustomError error = new CustomError();
         error.setMessage(ex.getMessage());
         error.setTimestamp(new Date().getTime());
         error.setStatus(HttpStatus.NOT_FOUND.value());
@@ -26,7 +27,7 @@ public class GlobalExceptionHandlerController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> badRequest(MethodArgumentNotValidException ex,
                                              HttpServletRequest request) {
-        Error error = new Error();
+        CustomError error = new CustomError();
         error.setMessage(ex.getMessage());
         error.setTimestamp(new Date().getTime());
         error.setStatus(HttpStatus.BAD_REQUEST.value());

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Error {
+public class CustomError {
     private String message;
     private int status;
     private Long timestamp;
