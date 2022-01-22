@@ -27,32 +27,47 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
-    @PostMapping(path = "/add")
+    @PostMapping(
+            path = "/add",
+            produces = {"application/json", "application/xml"}
+    )
     public ResponseEntity<VehicleModel> addvehicle(@RequestBody @Valid VehicleModel _vehicle) {
         VehicleModel vehicle = vehicleService.addVehicle(_vehicle);
         return ResponseEntity.ok(vehicle);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping(
+            path = "/update",
+            produces = {"application/json", "application/xml"}
+    )
     public ResponseEntity<VehicleModel> updatevehicle(
             @RequestBody @Valid VehicleModel _vehicle) {
         VehicleModel vehicle = vehicleService.updateVehicle(_vehicle);
         return ResponseEntity.ok(vehicle);
     }
 
-    @DeleteMapping(path = "/{vehicleId}/delete")
+    @DeleteMapping(
+            path = "/{vehicleId}/delete",
+            produces = {"application/json", "application/xml"}
+    )
     public void deletevehicle(@PathVariable(name = "vehicleId") String vehicleId) {
         vehicleService.deleteVehicle(vehicleId);
     }
 
-    @GetMapping(path = "/{vehicleId}")
+    @GetMapping(
+            path = "/{vehicleId}",
+            produces = {"application/json", "application/xml"}
+    )
     public ResponseEntity<VehicleModel> getvehicle(
             @PathVariable(name = "vehicleId") String vehicleId) {
         VehicleModel vehicle = vehicleService.getVehicleById(vehicleId);
         return ResponseEntity.ok(vehicle);
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(
+            path = "/all",
+            produces = {"application/json", "application/xml"}
+    )
     public ResponseEntity<Page<VehicleModel>> getvehicles(@PageableDefault(page = 0,
             size = 30) @SortDefault.SortDefaults({@SortDefault(sort = "modified",
             direction = Sort.Direction.DESC)}) Pageable pageable) {

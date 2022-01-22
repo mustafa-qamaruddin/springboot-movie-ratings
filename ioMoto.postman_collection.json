@@ -522,6 +522,488 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Vehicles XML",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<vehicle>\n   <licensePlateNumber>ABC123</licensePlateNumber>\n   <name>fancyCar</name>\n   <properties>\n      <color>blue</color>\n      <model>2021</model>\n      <type>unique</type>\n   </properties>\n   <vin>1234567890</vin>\n</vehicle>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vehicles/add?mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"add"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<vehicle>\n   <licensePlateNumber>ABC123</licensePlateNumber>\n   <name>fancyCar</name>\n   <properties>\n      <color>blue</color>\n      <model>2021</model>\n      <type>unique</type>\n   </properties>\n   <vin>1234567890</vin>\n</vehicle>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/vehicles/add?mediaType=xml",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"add"
+									],
+									"query": [
+										{
+											"key": "mediaType",
+											"value": "xml"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jan 2022 20:02:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "<VehicleModel>\n    <id>61ec62ceff79ee0d3266e75a</id>\n    <name>fancyCar</name>\n    <vin>1234567890</vin>\n    <licensePlateNumber>ABC123</licensePlateNumber>\n    <created>2022-01-22T21:02:22.690081751</created>\n    <modified>2022-01-22T21:02:22.690081751</modified>\n    <properties>\n        <color>blue</color>\n        <model>2021</model>\n        <type>unique</type>\n    </properties>\n    <color>blue</color>\n    <model>2021</model>\n    <type>unique</type>\n</VehicleModel>"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "<vehicle>\n   <id>61ec62a91204d57972ced900</id>\n   <licensePlateNumber>ABC123321CBA</licensePlateNumber>\n   <name>fancyCarUpToDate</name>\n   <properties>\n      <horsePower>3.5</horsePower>\n   </properties>\n   <vin>12345678900987654321</vin>\n</vehicle>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vehicles/update?mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"update"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "<vehicle>\n   <id>61ec62a91204d57972ced900</id>\n   <licensePlateNumber>ABC123321CBA</licensePlateNumber>\n   <name>fancyCarUpToDate</name>\n   <properties>\n      <horsePower>3.5</horsePower>\n   </properties>\n   <vin>12345678900987654321</vin>\n</vehicle>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/vehicles/update?mediaType=xml",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"update"
+									],
+									"query": [
+										{
+											"key": "mediaType",
+											"value": "xml"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jan 2022 20:05:22 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "<VehicleModel>\n    <id>61ec62a91204d57972ced900</id>\n    <name>fancyCarUpToDate</name>\n    <vin>12345678900987654321</vin>\n    <licensePlateNumber>ABC123321CBA</licensePlateNumber>\n    <created/>\n    <modified>2022-01-22T21:05:22.063840907</modified>\n    <properties>\n        <horsePower>3.5</horsePower>\n        <color>blue</color>\n        <model>2021</model>\n        <type>unique</type>\n    </properties>\n    <horsePower>3.5</horsePower>\n    <color>blue</color>\n    <model>2021</model>\n    <type>unique</type>\n</VehicleModel>"
+						}
+					]
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vehicles/61ec62a91204d57972ced900?mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"61ec62a91204d57972ced900"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/vehicles/61ec62a91204d57972ced900?mediaType=xml",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"61ec62a91204d57972ced900"
+									],
+									"query": [
+										{
+											"key": "mediaType",
+											"value": "xml"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jan 2022 20:05:56 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "<VehicleModel>\n    <id>61ec62a91204d57972ced900</id>\n    <name>fancyCarUpToDate</name>\n    <vin>12345678900987654321</vin>\n    <licensePlateNumber>ABC123321CBA</licensePlateNumber>\n    <created/>\n    <modified>2022-01-22T21:05:22.063</modified>\n    <properties>\n        <horsePower>3.5</horsePower>\n        <color>blue</color>\n        <model>2021</model>\n        <type>unique</type>\n    </properties>\n    <horsePower>3.5</horsePower>\n    <color>blue</color>\n    <model>2021</model>\n    <type>unique</type>\n</VehicleModel>"
+						}
+					]
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vehicles/all?page=1&size=2&sort=modified,ASC&mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "modified,ASC"
+								},
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getAll",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/vehicles/all?page=1&size=2&sort=modified,ASC&mediaType=xml",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"all"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "2"
+										},
+										{
+											"key": "sort",
+											"value": "modified,ASC"
+										},
+										{
+											"key": "mediaType",
+											"value": "xml"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/xml"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jan 2022 20:06:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "<PageImpl>\n    <content>\n        <content>\n            <id>61ec60b176e8765ff7c89c23</id>\n            <name>fancyCar</name>\n            <vin>1234567890</vin>\n            <licensePlateNumber>ABC123</licensePlateNumber>\n            <created>2022-01-22T20:53:21.557</created>\n            <modified>2022-01-22T20:53:21.557</modified>\n            <properties>\n                <color>blue</color>\n                <model>2021</model>\n                <type>unique</type>\n            </properties>\n            <color>blue</color>\n            <model>2021</model>\n            <type>unique</type>\n        </content>\n        <content>\n            <id>61ec61b82adaab0bdaad575b</id>\n            <name>fancyCar</name>\n            <vin>1234567890</vin>\n            <licensePlateNumber>ABC123</licensePlateNumber>\n            <created>2022-01-22T20:57:43.915</created>\n            <modified>2022-01-22T20:57:43.915</modified>\n            <properties>\n                <color>blue</color>\n                <model>2021</model>\n                <type>unique</type>\n            </properties>\n            <color>blue</color>\n            <model>2021</model>\n            <type>unique</type>\n        </content>\n    </content>\n    <pageable>\n        <sort>\n            <empty>false</empty>\n            <sorted>true</sorted>\n            <unsorted>false</unsorted>\n        </sort>\n        <offset>2</offset>\n        <pageNumber>1</pageNumber>\n        <pageSize>2</pageSize>\n        <paged>true</paged>\n        <unpaged>false</unpaged>\n    </pageable>\n    <totalPages>5</totalPages>\n    <totalElements>9</totalElements>\n    <last>false</last>\n    <size>2</size>\n    <number>1</number>\n    <sort>\n        <empty>false</empty>\n        <sorted>true</sorted>\n        <unsorted>false</unsorted>\n    </sort>\n    <numberOfElements>2</numberOfElements>\n    <first>false</first>\n    <empty>false</empty>\n</PageImpl>"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/vehicles/61ebba816f5aee35746d88c1/delete?mediaType=xml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"vehicles",
+								"61ebba816f5aee35746d88c1",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "mediaType",
+									"value": "xml"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/vehicles/61ebba816f5aee35746d88c1/delete?mediaType=xml",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"vehicles",
+										"61ebba816f5aee35746d88c1",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "mediaType",
+											"value": "xml"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/xml;charset=UTF-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Jan 2022 20:06:40 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "<CustomError>\n    <message>vehicle not found</message>\n    <status>404</status>\n    <timestamp>1642882000472</timestamp>\n</CustomError>"
+						}
+					]
+				}
+			]
 		}
 	]
 }
