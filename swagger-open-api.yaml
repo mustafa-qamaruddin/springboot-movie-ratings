@@ -1,0 +1,423 @@
+openapi: 3.0.0
+info:
+  title: ioMoto
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Vehicles
+  - name: Vehicles XML
+paths:
+  /api/v1/vehicles/add:
+    post:
+      tags:
+        - Vehicles XML
+      summary: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              example: |-
+                <vehicle>
+                   <licensePlateNumber>ABC123</licensePlateNumber>
+                   <name>fancyCar</name>
+                   <properties>
+                      <color>blue</color>
+                      <model>2021</model>
+                      <type>unique</type>
+                   </properties>
+                   <vin>1234567890</vin>
+                </vehicle>
+      parameters:
+        - name: mediaType
+          in: query
+          schema:
+            type: string
+          example: xml
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/xml
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Sat, 22 Jan 2022 20:02:25 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                <VehicleModel>
+                    <id>61ec62ceff79ee0d3266e75a</id>
+                    <name>fancyCar</name>
+                    <vin>1234567890</vin>
+                    <licensePlateNumber>ABC123</licensePlateNumber>
+                    <created>2022-01-22T21:02:22.690081751</created>
+                    <modified>2022-01-22T21:02:22.690081751</modified>
+                    <properties>
+                        <color>blue</color>
+                        <model>2021</model>
+                        <type>unique</type>
+                    </properties>
+                    <color>blue</color>
+                    <model>2021</model>
+                    <type>unique</type>
+                </VehicleModel>
+  /api/v1/vehicles/update:
+    put:
+      tags:
+        - Vehicles XML
+      summary: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              example: |-
+                <vehicle>
+                   <id>61ec62a91204d57972ced900</id>
+                   <licensePlateNumber>ABC123321CBA</licensePlateNumber>
+                   <name>fancyCarUpToDate</name>
+                   <properties>
+                      <horsePower>3.5</horsePower>
+                   </properties>
+                   <vin>12345678900987654321</vin>
+                </vehicle>
+      parameters:
+        - name: mediaType
+          in: query
+          schema:
+            type: string
+          example: xml
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/xml
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Sat, 22 Jan 2022 20:05:22 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                <VehicleModel>
+                    <id>61ec62a91204d57972ced900</id>
+                    <name>fancyCarUpToDate</name>
+                    <vin>12345678900987654321</vin>
+                    <licensePlateNumber>ABC123321CBA</licensePlateNumber>
+                    <created/>
+                    <modified>2022-01-22T21:05:22.063840907</modified>
+                    <properties>
+                        <horsePower>3.5</horsePower>
+                        <color>blue</color>
+                        <model>2021</model>
+                        <type>unique</type>
+                    </properties>
+                    <horsePower>3.5</horsePower>
+                    <color>blue</color>
+                    <model>2021</model>
+                    <type>unique</type>
+                </VehicleModel>
+  /api/v1/vehicles/61ebba816f5aee35746d88c1:
+    get:
+      tags:
+        - Vehicles
+      summary: get
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Sat, 22 Jan 2022 08:07:54 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 61ebba816f5aee35746d88c1
+                name: fancyCarUpToDate
+                vin: '12345678900987654321'
+                licensePlateNumber: ABC123321CBA
+                created: null
+                modified: '2022-01-22T09:04:32.856'
+                properties:
+                  horsePower: '3.5'
+                  color: blue
+                  model: '2021'
+                  type: unique
+                horsePower: '3.5'
+                color: blue
+                model: '2021'
+                type: unique
+  /api/v1/vehicles/all:
+    get:
+      tags:
+        - Vehicles XML
+      summary: getAll
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: size
+          in: query
+          schema:
+            type: integer
+          example: '2'
+        - name: sort
+          in: query
+          schema:
+            type: string
+          example: modified,ASC
+        - name: mediaType
+          in: query
+          schema:
+            type: string
+          example: xml
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/xml
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Sat, 22 Jan 2022 20:06:13 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                <PageImpl>
+                    <content>
+                        <content>
+                            <id>61ec60b176e8765ff7c89c23</id>
+                            <name>fancyCar</name>
+                            <vin>1234567890</vin>
+                            <licensePlateNumber>ABC123</licensePlateNumber>
+                            <created>2022-01-22T20:53:21.557</created>
+                            <modified>2022-01-22T20:53:21.557</modified>
+                            <properties>
+                                <color>blue</color>
+                                <model>2021</model>
+                                <type>unique</type>
+                            </properties>
+                            <color>blue</color>
+                            <model>2021</model>
+                            <type>unique</type>
+                        </content>
+                        <content>
+                            <id>61ec61b82adaab0bdaad575b</id>
+                            <name>fancyCar</name>
+                            <vin>1234567890</vin>
+                            <licensePlateNumber>ABC123</licensePlateNumber>
+                            <created>2022-01-22T20:57:43.915</created>
+                            <modified>2022-01-22T20:57:43.915</modified>
+                            <properties>
+                                <color>blue</color>
+                                <model>2021</model>
+                                <type>unique</type>
+                            </properties>
+                            <color>blue</color>
+                            <model>2021</model>
+                            <type>unique</type>
+                        </content>
+                    </content>
+                    <pageable>
+                        <sort>
+                            <empty>false</empty>
+                            <sorted>true</sorted>
+                            <unsorted>false</unsorted>
+                        </sort>
+                        <offset>2</offset>
+                        <pageNumber>1</pageNumber>
+                        <pageSize>2</pageSize>
+                        <paged>true</paged>
+                        <unpaged>false</unpaged>
+                    </pageable>
+                    <totalPages>5</totalPages>
+                    <totalElements>9</totalElements>
+                    <last>false</last>
+                    <size>2</size>
+                    <number>1</number>
+                    <sort>
+                        <empty>false</empty>
+                        <sorted>true</sorted>
+                        <unsorted>false</unsorted>
+                    </sort>
+                    <numberOfElements>2</numberOfElements>
+                    <first>false</first>
+                    <empty>false</empty>
+                </PageImpl>
+  /api/v1/vehicles/61ebba816f5aee35746d88c1/delete:
+    delete:
+      tags:
+        - Vehicles XML
+      summary: delete
+      parameters:
+        - name: mediaType
+          in: query
+          schema:
+            type: string
+          example: xml
+      responses:
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/xml;charset=UTF-8
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Sat, 22 Jan 2022 20:06:40 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                <CustomError>
+                    <message>vehicle not found</message>
+                    <status>404</status>
+                    <timestamp>1642882000472</timestamp>
+                </CustomError>
+  /api/v1/vehicles/61ec62a91204d57972ced900:
+    get:
+      tags:
+        - Vehicles XML
+      summary: get
+      parameters:
+        - name: mediaType
+          in: query
+          schema:
+            type: string
+          example: xml
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/xml
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            Date:
+              schema:
+                type: string
+                example: Sat, 22 Jan 2022 20:05:56 GMT
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=60
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: |-
+                <VehicleModel>
+                    <id>61ec62a91204d57972ced900</id>
+                    <name>fancyCarUpToDate</name>
+                    <vin>12345678900987654321</vin>
+                    <licensePlateNumber>ABC123321CBA</licensePlateNumber>
+                    <created/>
+                    <modified>2022-01-22T21:05:22.063</modified>
+                    <properties>
+                        <horsePower>3.5</horsePower>
+                        <color>blue</color>
+                        <model>2021</model>
+                        <type>unique</type>
+                    </properties>
+                    <horsePower>3.5</horsePower>
+                    <color>blue</color>
+                    <model>2021</model>
+                    <type>unique</type>
+                </VehicleModel>
