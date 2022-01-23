@@ -3,11 +3,3 @@ server:
   servlet:
     context-path: /api/v1
   port: 8080
-
-#spring:
-#  data:
-#    mongodb:
-#      host: mongodb+srv://cluster0.x6j48.mongodb.net
-#      database: myFirstDatabase
-#      username: samurai
-#      password: eP8VTkfXFJczOQDT
