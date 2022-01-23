@@ -95,6 +95,11 @@ public class VehicleServiceTest {
         assertEquals(response.getName(), vehicle.getName());
         assertNotNull(response.getId());
 
-        // update
+        // test get
+
+        // test update
+
+        // test delete
+
     }
 }
