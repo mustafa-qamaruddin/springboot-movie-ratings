@@ -15,12 +15,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -36,6 +37,8 @@ public class VehicleControllerTest {
     VehicleService vehicleService;
     @Mock
     VehicleRepository vehicleRepository;
+    @Mock
+    private Page<VehicleModel> pageableMock;
 
     @InjectMocks
     private VehicleController vehicleController;
@@ -80,7 +83,14 @@ public class VehicleControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonPayload)
         ).andExpect(status().isBadRequest()).andReturn();
-        // test update invalid
+        // test update
+        // valid
+        jsonPayload = jsonVehicleModel.write(vehicleModel).getJson();
+        mockMvc.perform(
+                post(resourceUrl + "update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonPayload)
+        ).andExpect(status().isOk()).andReturn();
         // inavlid
         jsonPayload = jsonVehicleModel.write(invalidVehicleModel).getJson();
         mockMvc.perform(
@@ -126,6 +136,11 @@ public class VehicleControllerTest {
         // valid
         mockMvc.perform(
                 delete(resourceUrl + "/abc/delete")
+        ).andExpect(status().isOk()).andReturn();
+        // get vehicles
+        mockMvc.perform(
+                get(resourceUrl + "/all")
+                        .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk()).andReturn();
     }
 }
