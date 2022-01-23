@@ -5,7 +5,6 @@ import com.iomoto.demo.controllers.GlobalExceptionHandlerController;
 import com.iomoto.demo.controllers.VehicleController;
 import com.iomoto.demo.exceptions.ResourceNotFoundException;
 import com.iomoto.demo.models.VehicleModel;
-import com.iomoto.demo.repositories.VehicleRepository;
 import com.iomoto.demo.services.VehicleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -35,10 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class VehicleControllerTest {
     @Mock
     VehicleService vehicleService;
-    @Mock
-    VehicleRepository vehicleRepository;
-    @Mock
-    private Page<VehicleModel> pageableMock;
 
     @InjectMocks
     private VehicleController vehicleController;
@@ -46,8 +39,6 @@ public class VehicleControllerTest {
     private MockMvc mockMvc;
 
     private JacksonTester<VehicleModel> jsonVehicleModel;
-    private String resourceUrl = "/vehicles/";
-
 
     @BeforeEach
     void setUp() {
@@ -69,6 +60,7 @@ public class VehicleControllerTest {
         vehicleModel.setLicensePlateNumber("xyz");
         var jsonPayload = jsonVehicleModel.write(vehicleModel).getJson();
         // test create
+        String resourceUrl = "/vehicles/";
         mockMvc.perform(
                 post(resourceUrl + "add")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -87,7 +79,7 @@ public class VehicleControllerTest {
         // valid
         jsonPayload = jsonVehicleModel.write(vehicleModel).getJson();
         mockMvc.perform(
-                post(resourceUrl + "update")
+                put(resourceUrl + "update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonPayload)
         ).andExpect(status().isOk()).andReturn();
@@ -136,11 +128,6 @@ public class VehicleControllerTest {
         // valid
         mockMvc.perform(
                 delete(resourceUrl + "/abc/delete")
-        ).andExpect(status().isOk()).andReturn();
-        // get vehicles
-        mockMvc.perform(
-                get(resourceUrl + "/all")
-                        .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk()).andReturn();
     }
 }
