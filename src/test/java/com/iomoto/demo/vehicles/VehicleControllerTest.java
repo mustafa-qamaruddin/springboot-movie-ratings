@@ -1,6 +1,7 @@
 package com.iomoto.demo.vehicles;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.iomoto.demo.controllers.GlobalExceptionHandlerController;
 import com.iomoto.demo.controllers.VehicleController;
 import com.iomoto.demo.exceptions.ResourceNotFoundException;
@@ -38,27 +39,26 @@ public class VehicleControllerTest {
 
     private MockMvc mockMvc;
 
-    private JacksonTester<VehicleModel> jsonVehicleModel;
+    private JacksonTester<VehicleModel> mapperVehicleModel;
 
     @BeforeEach
     void setUp() {
-        JacksonTester.initFields(this, new ObjectMapper());
         mockMvc = MockMvcBuilders.standaloneSetup(vehicleController)
                 .setControllerAdvice(new GlobalExceptionHandlerController())
                 .build();
         assertThat(vehicleController).isNotNull();
-        assertThat(jsonVehicleModel).isNotNull();
     }
 
     @Test
-    void testCrud() throws Exception {
+    void testCrudJson() throws Exception {
+        JacksonTester.initFields(this, new JsonMapper());
         // given
         VehicleModel vehicleModel = new VehicleModel();
         vehicleModel.setId("abc");
         vehicleModel.setName("abc");
         vehicleModel.setVin("123");
         vehicleModel.setLicensePlateNumber("xyz");
-        var jsonPayload = jsonVehicleModel.write(vehicleModel).getJson();
+        var jsonPayload = mapperVehicleModel.write(vehicleModel).getJson();
         // test create
         String resourceUrl = "/vehicles/";
         mockMvc.perform(
@@ -69,7 +69,7 @@ public class VehicleControllerTest {
         // test create invalid
         // inavlid
         VehicleModel invalidVehicleModel = new VehicleModel();
-        jsonPayload = jsonVehicleModel.write(invalidVehicleModel).getJson();
+        jsonPayload = mapperVehicleModel.write(invalidVehicleModel).getJson();
         mockMvc.perform(
                 post(resourceUrl + "add")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -77,14 +77,14 @@ public class VehicleControllerTest {
         ).andExpect(status().isBadRequest()).andReturn();
         // test update
         // valid
-        jsonPayload = jsonVehicleModel.write(vehicleModel).getJson();
+        jsonPayload = mapperVehicleModel.write(vehicleModel).getJson();
         mockMvc.perform(
                 put(resourceUrl + "update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonPayload)
         ).andExpect(status().isOk()).andReturn();
         // inavlid
-        jsonPayload = jsonVehicleModel.write(invalidVehicleModel).getJson();
+        jsonPayload = mapperVehicleModel.write(invalidVehicleModel).getJson();
         mockMvc.perform(
                 put(resourceUrl + "update")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -128,6 +128,34 @@ public class VehicleControllerTest {
         // valid
         mockMvc.perform(
                 delete(resourceUrl + "/abc/delete")
+        ).andExpect(status().isOk()).andReturn();
+    }
+
+    @Test
+    void testCrudXml() throws Exception {
+        JacksonTester.initFields(this, new XmlMapper());
+        // given
+        VehicleModel vehicleModel = new VehicleModel();
+        vehicleModel.setId("abc");
+        vehicleModel.setName("abc");
+        vehicleModel.setVin("123");
+        vehicleModel.setLicensePlateNumber("xyz");
+        var xmlPayload = mapperVehicleModel.write(vehicleModel).getJson();
+        // test create
+        String resourceUrl = "/vehicles/";
+        mockMvc.perform(
+                post(resourceUrl + "add")
+                        .contentType(MediaType.APPLICATION_XML)
+                        .content(xmlPayload)
+        ).andExpect(status().isOk()).andReturn();
+        // test create invalid
+        // test update
+        // valid
+        xmlPayload = mapperVehicleModel.write(vehicleModel).getJson();
+        mockMvc.perform(
+                put(resourceUrl + "update")
+                        .contentType(MediaType.APPLICATION_XML)
+                        .content(xmlPayload)
         ).andExpect(status().isOk()).andReturn();
     }
 }
