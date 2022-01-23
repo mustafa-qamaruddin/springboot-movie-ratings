@@ -20,11 +20,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
@@ -103,5 +105,27 @@ public class VehicleControllerTest {
                 get(resourceUrl + "/007")
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isNotFound()).andReturn();
+        // valid
+        when(vehicleService.getVehicleById("abc")).thenReturn(vehicleModel);
+        mockMvc.perform(
+                get(resourceUrl + "/abc")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk()).andReturn();
+        // delete
+        // inavlid
+        doThrow(new IllegalArgumentException("vehicleId must not be null|blank|empty"))
+                .when(vehicleService).deleteVehicle("   ");
+        mockMvc.perform(
+                delete(resourceUrl + "/   /delete")
+        ).andExpect(status().isBadRequest()).andReturn();
+        // not found
+        doThrow(new ResourceNotFoundException("vehicle not found")).when(vehicleService).deleteVehicle("007");
+        mockMvc.perform(
+                delete(resourceUrl + "/007/delete")
+        ).andExpect(status().isNotFound()).andReturn();
+        // valid
+        mockMvc.perform(
+                delete(resourceUrl + "/abc/delete")
+        ).andExpect(status().isOk()).andReturn();
     }
 }
