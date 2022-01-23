@@ -1,4 +1,4 @@
-package com.iomoto.demo.vehicles;
+package com.iomoto.demo.controllers;
 
 import com.iomoto.demo.models.VehicleModel;
 import com.iomoto.demo.services.VehicleService;

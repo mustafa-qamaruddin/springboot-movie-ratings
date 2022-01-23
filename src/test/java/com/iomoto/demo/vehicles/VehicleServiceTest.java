@@ -1,5 +1,6 @@
 package com.iomoto.demo.vehicles;
 
+import com.iomoto.demo.controllers.VehicleController;
 import com.iomoto.demo.exceptions.ResourceNotFoundException;
 import com.iomoto.demo.models.VehicleModel;
 import com.iomoto.demo.services.VehicleService;
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.context.ApplicationContextInitializer;
@@ -33,12 +34,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith({
+        SpringExtension.class,
+        MockitoExtension.class
+})
 @DataMongoTest(
         includeFilters = @ComponentScan.Filter(
                 type = FilterType.ASSIGNABLE_TYPE,
                 classes = {
-                        VehicleService.class
+                        VehicleService.class,
+                        VehicleController.class
                 }
         )
 )
@@ -79,7 +84,7 @@ public class VehicleServiceTest {
     }
 
     @Test
-    void testCrud() throws Exception {
+    void testCrud() {
         // test create
         // given
         var vehicle = new VehicleModel();

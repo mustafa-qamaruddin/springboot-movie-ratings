@@ -1,4 +1,4 @@
-package com.iomoto.demo.vehicles;
+package com.iomoto.demo.controllers;
 
 import com.iomoto.demo.exceptions.CustomError;
 import com.iomoto.demo.exceptions.ResourceNotFoundException;
@@ -24,8 +24,8 @@ public class GlobalExceptionHandlerController {
         return new ResponseEntity<>(error, null, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> badRequest(MethodArgumentNotValidException ex,
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> badRequest(IllegalArgumentException ex,
                                              HttpServletRequest request) {
         CustomError error = new CustomError();
         error.setMessage(ex.getMessage());
