@@ -88,6 +88,7 @@ public class VehicleServiceTest {
         vehicle.setLicensePlateNumber("xyz");
         var props = new HashMap<String, Object>();
         props.put("foo", "bar");
+        props.put("baz", "bar");
         vehicle.setProperties(props);
 
         // when
@@ -114,6 +115,7 @@ public class VehicleServiceTest {
         // given
         var newProps = new HashMap<String, Object>();
         newProps.put("horsePower", 3.5);
+        newProps.put("baz", "new bar");
         vehicle.setProperties(newProps);
 
         // when
@@ -138,10 +140,28 @@ public class VehicleServiceTest {
         // then
         assertEquals(resourceNotFoundException.getMessage(), "vehicle not found");
 
-        // test 400 on update
+        // test 404 on update
         // given
         var invalidVehicle = new VehicleModel();
+        invalidVehicle.setId("-1");
+        // when
+        resourceNotFoundException = assertThrows(
+                ResourceNotFoundException.class, () -> vehicleService.updateVehicle(invalidVehicle)
+        );
+        // then
+        assertEquals(resourceNotFoundException.getMessage(), "vehicle not found");
 
+        // test 404 on delete
+        // when
+        resourceNotFoundException = assertThrows(
+                ResourceNotFoundException.class, () -> vehicleService.deleteVehicle("-1")
+        );
+        // then
+        assertEquals(resourceNotFoundException.getMessage(), "vehicle not found");
+
+        // test 400 on update
+        // given
+        invalidVehicle.setId(null);
         // when
         var illegalArgumentException = assertThrows(
                 IllegalArgumentException.class, () -> vehicleService.updateVehicle(invalidVehicle)
@@ -149,27 +169,26 @@ public class VehicleServiceTest {
         // then
         assertEquals(illegalArgumentException.getMessage(), "The given id must not be null!");
 
-        // test 400 on delete
+        testInvalidInputs(null);
+        testInvalidInputs("");
+        testInvalidInputs("   ");
+    }
+
+    private void testInvalidInputs(String wrongVal) {
+        // test 400 on get
         // when
-        illegalArgumentException = assertThrows(
-                IllegalArgumentException.class, () -> vehicleService.deleteVehicle("")
+        var illegalArgumentException = assertThrows(
+                IllegalArgumentException.class, () -> vehicleService.getVehicleById(wrongVal)
         );
         // then
         assertEquals(illegalArgumentException.getMessage(), "vehicleId must not be null|blank|empty");
 
-//        // test invalid values
-//        // when
-//        exception = assertThrows(
-//                ResourceNotFoundException.class,
-//                () -> vehicleService.addVehicle(invalidVehicle)
-//        );
-//
-//        String expectedMessage = "For input string";
-//        String actualMessage = exception.getMessage();
-//
-//        assertTrue(actualMessage.contains(expectedMessage));
-//        // then
-//        assertEquals(response.getName(), vehicle.getName());
-//        assertNotNull(response.getId());
+        // test 400 on delete
+        // when
+        illegalArgumentException = assertThrows(
+                IllegalArgumentException.class, () -> vehicleService.deleteVehicle(wrongVal)
+        );
+        // then
+        assertEquals(illegalArgumentException.getMessage(), "vehicleId must not be null|blank|empty");
     }
 }
