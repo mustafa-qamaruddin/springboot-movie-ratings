@@ -1,4 +1,4 @@
-package com.iomoto.demo.controllers;
+package com.iomoto.demo.vehicles;
 
 import com.iomoto.demo.exceptions.CustomError;
 import com.iomoto.demo.exceptions.ResourceNotFoundException;

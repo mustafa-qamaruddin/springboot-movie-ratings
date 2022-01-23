@@ -9,11 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class Config implements WebMvcConfigurer {
-    @Bean
-    public VehicleService vehicleService() {
-        return new VehicleService();
-    }
-
     @Override
     public void configureContentNegotiation(
             final ContentNegotiationConfigurer contentNegotiationConfigurer
