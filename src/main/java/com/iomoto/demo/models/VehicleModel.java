@@ -24,9 +24,9 @@ public class VehicleModel {
     @NotNull
     public String name;
     @NotNull
+    @Size(max = 17)
     public String vin;
     @NotNull
-    @Size(min = 2, max = 30)
     public String licensePlateNumber;
     @CreatedDate
     private LocalDateTime created;
