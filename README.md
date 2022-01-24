@@ -22,6 +22,14 @@ OpenJDK Runtime Environment AdoptOpenJDK-11.0.11+9 (build 11.0.11+9)
 OpenJDK 64-Bit Server VM AdoptOpenJDK-11.0.11+9 (build 11.0.11+9, mixed mode)
 ```
 
+## Change Database Production/Development
+
+The testing uses TestContainers to avoid 
+writing to the production/staging database.
+
+The database settings can be overriden in
+[src/main/resources/application.yaml](src/main/resources/application.yaml)
+
 ## Run App
 
 ```bash
@@ -52,3 +60,43 @@ Reports are available in
 
 * [build/testReports/index.html](build/testReports/index.html)
 * [build/reports/tests/test/index.html](build/reports/tests/test/index.html)
+
+# Directory Structure
+
+<pre>
+.
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── iomoto
+│   │           ├── demo
+│   │           │   ├── configs
+│   │           │   │   ├── Config.java
+│   │           │   │   └── MongoValidationConfig.java
+│   │           │   ├── controllers
+│   │           │   │   ├── GlobalExceptionHandlerController.java
+│   │           │   │   └── VehicleController.java
+│   │           │   ├── exceptions
+│   │           │   │   ├── CustomError.java
+│   │           │   │   └── ResourceNotFoundException.java
+│   │           │   ├── models
+│   │           │   │   └── VehicleModel.java
+│   │           │   ├── repositories
+│   │           │   │   └── VehicleRepository.java
+│   │           │   └── services
+│   │           │       └── VehicleService.java
+│   │           └── DemoApplication.java
+│   └── resources
+│       └── application.yaml
+└── test
+    └── java
+        └── com
+            └── iomoto
+                └── demo
+                    ├── DemoApplicationTests.java
+                    └── vehicles
+                        ├── VehicleControllerTest.java
+                        └── VehicleServiceTest.java
+
+
+</pre>
