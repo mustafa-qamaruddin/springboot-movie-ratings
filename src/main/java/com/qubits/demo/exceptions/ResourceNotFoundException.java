@@ -1,4 +1,4 @@
-package com.iomoto.demo.exceptions;
+package com.qubits.demo.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
 

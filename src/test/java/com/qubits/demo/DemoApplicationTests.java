@@ -1,4 +1,4 @@
-package com.iomoto.demo;
+package com.qubits.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,10 +1,9 @@
-package com.iomoto.demo.controllers;
+package com.qubits.demo.controllers;
 
-import com.iomoto.demo.exceptions.CustomError;
-import com.iomoto.demo.exceptions.ResourceNotFoundException;
+import com.qubits.demo.exceptions.CustomError;
+import com.qubits.demo.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 

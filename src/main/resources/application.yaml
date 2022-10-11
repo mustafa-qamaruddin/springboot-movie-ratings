@@ -1,4 +1,3 @@
-spring.data.mongodb.uri: mongodb+srv://samurai:eP8VTkfXFJczOQDT@cluster0.x6j48.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 server:
   servlet:
     context-path: /api/v1
