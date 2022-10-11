@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,22 +26,22 @@ public class Rating {
   @Id
   String id;
   @ManyToOne
-  @JoinColumn(name = "user_id")
-  User user;
+  Customer customer;
   @ManyToOne
-  @JoinColumn(name = "movie_id")
   Movie movie;
   @NotNull
   @Min(1)
   @Max(5)
+  @Column(name = "rating_value")
   int value;
   @CreatedDate
   private LocalDateTime created;
   @LastModifiedDate
   private LocalDateTime modified;
-  public Rating(String id, User user, Movie movie, int value) {
+
+  public Rating(String id, Customer customer, Movie movie, int value) {
     this.id = id;
-    this.user = user;
+    this.customer = customer;
     this.movie = movie;
     this.value = value;
   }

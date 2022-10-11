@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -21,7 +20,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Customer {
   @Id
   String id;
   @NotNull
@@ -30,6 +29,6 @@ public class User {
   private LocalDateTime created;
   @LastModifiedDate
   private LocalDateTime modified;
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "customer")
   Set<Rating> ratings;
 }

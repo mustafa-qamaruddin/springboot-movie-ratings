@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MovieService {
 
@@ -17,7 +19,7 @@ public class MovieService {
     return movieRepository.findAll(pageable);
   }
 
-  public Iterable<Movie> getAllMoviesByTitleContaining(String title, Pageable pageable) {
+  public Page<Movie> getAllMoviesByTitleContaining(String title, Pageable pageable) {
     return movieRepository.findAllByTitleContaining(title, pageable);
   }
 }

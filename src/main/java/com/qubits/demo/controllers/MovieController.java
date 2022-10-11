@@ -34,7 +34,7 @@ public class MovieController {
       @SortDefault.SortDefaults({
           @SortDefault(sort = "modified", direction = Sort.Direction.DESC)
       }) Pageable pageable) {
-    Page<Movie> allMovies = movieService.getAllMovies(pageable);
+    var allMovies = movieService.getAllMovies(pageable);
     return ResponseEntity.ok(allMovies);
   }
 
@@ -50,7 +50,7 @@ public class MovieController {
       }) Pageable pageable,
       @Valid @RequestParam(required = false) String title
   ) {
-    Iterable<Movie> allMovies = movieService.getAllMoviesByTitleContaining(title, pageable);
+    var allMovies = movieService.getAllMoviesByTitleContaining(title, pageable);
     return ResponseEntity.ok(allMovies);
   }
 }
